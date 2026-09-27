@@ -41,9 +41,26 @@ app.get("/", (req, res) => {
 
       let count = result[0].count;
       res.render("home", { count: count });
-      console.log(count);
+      console.log(result);
     });
   } catch {
     console.log("there is a outer error");
+  }
+});
+
+app.get("/user", (req, res) => {
+  try {
+    let q = "SELECT * FROM TB ";
+    connection.query(q, (err, result) => {
+      if (err) {
+        console.log("there is a error");
+        return;
+      }
+
+      res.render("users", { data: result });
+    });
+  } catch {
+    console.log("There is a error;");
+    return;
   }
 });
